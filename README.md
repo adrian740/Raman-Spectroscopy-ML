@@ -11,7 +11,7 @@ This repository uses:
 In addition, Orange3 was installed (via anaconda) to construct the model and evaluate data points.
 
 # How to use the Code
-The code is split into 3 python files and one Orange3 file. These are provided indivdualy for customizability reasons.
+The code is split into 3 python files and one Orange3 file. These are provided individually for customizability reasons.
 
 ## Preprocessing (preprocessor.py)
 Used to format the data into `.csv` files that will serve as the input to Orange3. Provide:
