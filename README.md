@@ -14,7 +14,7 @@ In addition, Orange3 was installed (via anaconda) to construct the model and eva
 The code is split into 3 python files and one Orange3 file. These are provided indivdualy for customizability reasons.
 
 ## Preprocessing (preprocessor.py)
-Used to format the data into `<.csv>` files that will serve as the input to Orange3. Provide:
+Used to format the data into `.csv` files that will serve as the input to Orange3. Provide:
 1. `<temp>`: the target temperature
 2. `<n>`: The length of the vector of raman shifts.
 3. (Optional) To train the model, you will need to specify one train dataset. To compile the train dataset, modify lines 29 and 31 as needed. 
