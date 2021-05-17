@@ -15,15 +15,17 @@ The code is split into 3 python files and one Orange3 file. These are provided i
 
 ## Preprocessing (preprocessor.py)
 Used to format the data into `.csv` files that will serve as the input to Orange3. Provide:
-1. `<temp>`: the target temperature
-2. `<n>`: The length of the vector of raman shifts.
+1. `temp`: the target temperature
+2. `n`: The length of the vector of raman shifts.
 3. (Optional) To train the model, you will need to specify one train dataset. To compile the train dataset, modify lines 29 and 31 as needed. 
 
 This will need to be performed for all temperatures.
 
 ## Processing (processor.py)
+Used to visualize the intensity distribution at given `cols`. Very useful to clearly identify relevant raman shifts.
 
 ## Orange3 (raman.ows)
-Used to train and evaluate the model. Open the file using Orange3. Input the `<.csv>` files generated before. 'File' nodes need to be refreshed due to file size. To do this, double click on each 'File' node and press 'Refresh' or find the `<.csv>` file. Once completed, click on each 'Save Data' node to save the data files, eg `<res_120.csv>`.
+Used to train and evaluate the model. Open the file using Orange3. Input the `.csv` files generated before. 'File' nodes need to be refreshed due to file size. To do this, double click on each 'File' node and press 'Refresh' or find the `.csv` file. Once completed, click on each 'Save Data' node to save the data files, eg `res_120.csv`.
 
 ## Post-Processing (result_processor.py)
+Used to construct the concentration profiles at the given temperature. Can also combine all temperatures to see the effect cure temperature has on interphase thickness.
