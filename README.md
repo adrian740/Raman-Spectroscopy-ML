@@ -29,3 +29,6 @@ Used to train and evaluate the model. Open the file using Orange3. Input the `.c
 
 ## Post-Processing (result_processor.py)
 Used to construct the concentration profiles at the given temperature. Can also combine all temperatures to see the effect cure temperature has on interphase thickness.
+
+# Results
+This method is very promising, correctly identifying the sample each time. See the Orange3 confusion matrix. It should be possible to expand this code to identify more materials.
