@@ -1,5 +1,5 @@
 # Raman Spectroscopy ML
-Using Random Forest and SVM to Process Raman Spectroscopy Data. The code in this repository inputs raman shift and counts for a range of x coordinates, determines using random forest and SVM the key raman shifts that correspond to a material, and can perform regression on an unkown sample to determine the makeup of that sample.
+Using Random Forest and SVM to Process Raman Spectroscopy Data. The code in this repository inputs raman shift and counts for a range of x coordinates, determines using random forest and SVM the key raman shifts that correspond to a material, and can perform regression on an unknown sample to determine the makeup of that sample.
 
 # Dependencies
 This repository uses:
