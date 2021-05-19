@@ -5,8 +5,11 @@ from os import listdir
 from os.path import isfile, join
 import pandas as pd
 
-temp = "180"
+temp = "120"
 path = "data analysis project//" + temp + "oC//"
+
+#temp = "multilayer"
+#path = "multilAYER//"
 
 allfiles = [f for f in listdir(path) if isfile(join(path, f))]
 

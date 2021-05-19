@@ -30,8 +30,10 @@ def read(t):
     
     return x, y, y_RF
 
-temp = "140"
-path = "res_" + temp + ".csv"
+#temp = "140"
+#path = "res_" + temp + ".csv"
+
+path = "res_multilayer.csv"
 
 df = pd.read_csv(path)
 df = df.drop([0, 1])
@@ -70,6 +72,9 @@ plt.legend()
 format_plot()
 
 plt.show()
+
+if True:
+    exit()
 
 temps = ["120", "140", "160", "180"]
 
