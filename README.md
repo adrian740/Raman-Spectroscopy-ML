@@ -1,5 +1,5 @@
 # Raman Spectroscopy ML
-Using Random Forest and SVM to Process Raman Spectroscopy Data. The code in this repository inputs raman shift and counts for a range of x coordinates, determines using random forest and SVM the key raman shifts that correspond to a material, and can perform regression on an unkown sample to determine the makeup of that sample.
+Using Random Forest and SVM to Process Raman Spectroscopy Data. The code in this repository inputs raman shift and counts for a range of x coordinates, determines using random forest and SVM the key raman shifts that correspond to a material, and can perform regression on an unknown sample to determine the makeup of that sample.
 
 # Dependencies
 This repository uses:
@@ -29,3 +29,6 @@ Used to train and evaluate the model. Open the file using Orange3. Input the `.c
 
 ## Post-Processing (result_processor.py)
 Used to construct the concentration profiles at the given temperature. Can also combine all temperatures to see the effect cure temperature has on interphase thickness.
+
+# Results
+This method is very promising, correctly identifying the sample each time. See the Orange3 confusion matrix. It should be possible to expand this code to identify more materials.
