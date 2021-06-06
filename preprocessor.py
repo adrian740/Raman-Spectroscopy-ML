@@ -5,7 +5,7 @@ from os import listdir
 from os.path import isfile, join
 import pandas as pd
 
-temp = "120"
+temp = "180"
 path = "data analysis project//" + temp + "oC//"
 
 #temp = "multilayer"
