@@ -3,7 +3,6 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import scipy.signal as signal
 
 # Format matplotlib
 plt.rcParams.update({'font.size': 10})
@@ -15,9 +14,17 @@ def format_plot():
     plt.grid(b=True, which='major', color='gray', linestyle='-')
     plt.grid(b=True, which='minor', color='lightgray', linestyle='--')
     
+    
+"""
+This code takes in the processed data from the machine learning and plots a
+concentration profile according to the data. It will also remove anomalies (hand detected)
+and replace them with a cross. 
 
-plot_RF = True
+To use first run the machine learning algorithm, details specified in preprocessor.py
+"""
 
+# Read the data from the csv file, and return the x coordinate, the concentration
+# according to the SVM and RF model
 def read(t):
     path = "res_" + t + ".csv"
     
@@ -30,86 +37,55 @@ def read(t):
     
     return x, y, y_RF
 
-temp = "120"
-path = "res_" + temp + ".csv"
+# Target temperature to read
+path = "120"
 
-#path = "res_multilayer.csv"
+#path = "multilayer"
 
-df = pd.read_csv(path)
-df = df.drop([0, 1])
+x, y, y_RF = read(path)
 
-x = np.array(df["x"]).astype(np.float32)
-y = np.array(df["SVM (1)"]).astype(np.float16)
-y_RF = np.array(df["Random Forest (1)"]).astype(np.float16)
 
-# Process so as to remove the anomalies and plot them as a dashed line
+# Plot the result from the random forest. Since only 10 trees were used the 
+# accuracy of the RF is limited to 1/10=0.1=10% accuracy. Still useful to 
+# see what is going on for the SVM model as they pick on very similar patterns
+plot_RF = True
+
+# whether to remove the anomaly or not. Specify the location of the anomaly in mask
+remove_anomaly = True
+
+# Process so as to remove the anomalies and replace them with a cross (if remove_anomaly is true)
 mask = (x < 0.5) | (x > 1.1)
 
-#mask = x > -100 # Remove to remove anomaly, see plot line as well
+if not remove_anomaly:
+    mask = np.ones(len(x), dtype=bool)
 
+# Invert the mask
 mask_inv = np.invert(mask)
 
+# Obtain the new data (without anomaly)
 x_new = x[mask]
 y_new = y[mask]
 
 x_inv = x[mask_inv]
-y_inv = x[mask_inv]
+y_inv = y[mask_inv]
 
+# Formatting
 plt.xlabel("Distance [microns]")
 plt.ylabel("Normalized Peak Intensity [-]")
-plt.title(r"Concentration Profile at ${0}\degree C$".format(temp))
+plt.title(r"Concentration Profile at ${0}\degree C$".format(path))
 
 plt.plot(x_new, 1-y_new, label="% Epoxy (SVM)", color="C0")
 plt.plot(x_new, y_new, label="% PEI (SVM)", color="C1")
 
 plt.scatter(x_inv, y_inv, label="Anomaly", color="r", marker="x", s=13, zorder=2)
 
+# Print what was removed
 print(x_inv, "\n", y_inv)
 
+# Plot random forest if true
 if plot_RF:
     plt.plot(x, y_RF, "--", label="% PEI (RF)", color="C2")
 plt.legend()
 format_plot()
 
-plt.show()
-
-if True:
-    exit()
-
-# Butterworth Filter
-N = 3  # Filter order
-Wn = 0.1  # Cutoff frequency
-B, A = signal.butter(N, Wn, output='ba')
-
-def smooth(y):
-    return signal.filtfilt(B, A, y)
-
-smooth_data = signal.filtfilt(B, A, y)
-smooth_data_RF = signal.filtfilt(B, A, y_RF)
-
-plt.xlabel("Distance [micrometers]")
-plt.ylabel("Normalized Peak Intensity [-]")
-plt.plot(x, smooth_data, label="% PEI (SVM)", color="C1")
-if plot_RF:
-    plt.plot(x, smooth_data_RF, label="% PEI (RF)", color="C2")
-plt.legend()
-format_plot()
-
-plt.show()
-
-if True:
-    exit()
-
-temps = ["120", "140", "160", "180"]
-
-plt.xlabel("Distance [micrometers]")
-plt.ylabel("Normalized Peak Intensity [-]")
-for t in temps:
-    x, y_SVM, y_RF = read(t)
-    y_s = smooth(y_SVM)
-    d = np.minimum(abs(1 - y_s), abs(y_s))
-    plt.plot(x, d, label="% PEI (SVM) (" + t + r"$^{\circ}$C)")
-
-plt.legend()
-format_plot()
 plt.show()
