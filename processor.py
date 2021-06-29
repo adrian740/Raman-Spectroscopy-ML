@@ -66,8 +66,16 @@ df = df.drop(df.columns[[0]], axis=1)
 # Manually input the intensity cutoffs obtained from machine learning 
 intensity_cutoffs = [973, 739, 738, 2302, 1236, 2271, 446, 865, 813, 1633]
 
+# TESTING
+intensity_cutoffs = [1811.7052, 1351.9456, 1427.9778, 756.3234, 908.9467, 639.3465, 521.4253, 476.7677, 347.7531, 264.428]
+
 # The raman shifts considered.
 cols = ["705.7", "706.2", "951.0", "986.7", "990.4", "1004.6", "1347.0", "1370.1", "1390.6", "1601.8"]
+
+# TESTING
+cols = [1004.6, 1380.6, 702.0, 1115.9, 1621.2, 952.6, 1455.2, 1249.8, 784.5, 1166.9]
+cols = ["%.1f" % number for number in cols]
+
 cols = ["raman" + c for c in cols]
 
 # Convert the "1" to a 1 (or 0)
